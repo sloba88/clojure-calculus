@@ -12,6 +12,9 @@
   :ring {:handler restful-clojure.handler/app
          :nrepl {:start? true
                  :port 9998}}
+                 
+   :min-lein-version "2.0.0"
+
   :profiles
   {:dev {:dependencies [
                         [org.clojure/clojure "1.7.0"]
