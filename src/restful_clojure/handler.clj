@@ -4,6 +4,7 @@
   (:require [restful-clojure.core :as core])
   (:require [ring.middleware.json :as middleware])
   (:require [ring.util.response :refer [response]])
+  (:require [compojure.route :as route])
   (:import java.util.Base64))
 
 (defn tokenize [expr]
@@ -51,7 +52,10 @@
 
 ;define REST route
 (defroutes app-routes
-  (GET "/calculus/:query" [query] (core/wrap-response(calculate(decode(String. query))))))
+  (GET "/calculus/:query" [query] (core/wrap-response(calculate(decode(String. query)))))
+  (GET "/" [] "Go to /calculus and pass base64 encoded arithmetic operation string")
+  (GET "/calculus" [] "Param missing")
+  (route/not-found "{\"message\":\"Page not found\"}"))
 
 ;wrap response header to json
 (def app
