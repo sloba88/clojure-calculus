@@ -10,3 +10,8 @@ lein ring server-headless
 ```
 lein test :only restful-clojure.handler-test/test-app
 ```
+
+## example
+> 3+2
+
+visit http://0.0.0.0:3000/calculus/Misz
