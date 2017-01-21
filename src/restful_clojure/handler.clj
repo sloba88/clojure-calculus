@@ -1,6 +1,9 @@
 (ns restful-clojure.handler
   (:use compojure.core)
   (:require [compojure.handler :as handler])
+  (:require [restful-clojure.core :as core])
+  (:require [ring.middleware.json :as middleware])
+  (:require [ring.util.response :refer [response]])
   (:import java.util.Base64))
 
 (defn tokenize [expr]
@@ -48,11 +51,11 @@
 
 ;define REST route
 (defroutes app-routes
-  (GET "/calculus/:query" [query] (wrap-response(calculate(decode(String. query))))))
+  (GET "/calculus/:query" [query] (core/wrap-response(calculate(decode(String. query))))))
 
 ;wrap response header to json
 (def app
   (-> app-routes
       (middleware/wrap-json-body)
       (middleware/wrap-json-response)
-      (wrap-exception-handling)))
+      (core/wrap-exception-handling)))

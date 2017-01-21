@@ -1,10 +1,8 @@
-(ns restful-clojure.core
-  (:require [ring.middleware.json :as middleware])
-  (:require [ring.util.response :refer [response]]))
+(ns restful-clojure.core)
 
 ;wrap response to json
-(defn- wrap-response [string]
-  {:body {:result string}}
+(defn wrap-response [string]
+  {:body {:error false :result string}}
 )
 
 ;catch all exceptions
